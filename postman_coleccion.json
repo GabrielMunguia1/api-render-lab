@@ -1,0 +1,54 @@
+{
+  "info": {
+    "name": "API Render Lab",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "baseUrl", "value": "https://TU-SERVICIO.onrender.com" }
+  ],
+  "item": [
+    {
+      "name": "1. Bienvenida",
+      "request": { "method": "GET", "url": "{{baseUrl}}/" }
+    },
+    {
+      "name": "2. Health",
+      "request": { "method": "GET", "url": "{{baseUrl}}/health" }
+    },
+    {
+      "name": "3. Listar productos",
+      "request": { "method": "GET", "url": "{{baseUrl}}/api/productos" }
+    },
+    {
+      "name": "4. Crear producto (válido) - 201",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"Monitor\",\n  \"precio\": 1500\n}" },
+        "url": "{{baseUrl}}/api/productos"
+      }
+    },
+    {
+      "name": "5. Crear producto (inválido) - 400",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{\n  \"nombre\": \"\",\n  \"precio\": -10\n}" },
+        "url": "{{baseUrl}}/api/productos"
+      }
+    },
+    {
+      "name": "6. JSON mal formado (prueba del manejador de errores)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": { "mode": "raw", "raw": "{ nombre: Monitor" },
+        "url": "{{baseUrl}}/api/productos"
+      }
+    },
+    {
+      "name": "7. Ruta inexistente - 404",
+      "request": { "method": "GET", "url": "{{baseUrl}}/no-existe" }
+    }
+  ]
+}
