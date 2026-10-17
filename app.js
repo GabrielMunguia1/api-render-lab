@@ -18,14 +18,14 @@ if(process.env.FRONTEND_URL){
     app.use(cors({
         origin: process.env.FRONTEND_URL,
         methods: ["GET","POST"],
-        allowedHeaders: ["Contennt-Type"]
+        allowedHeaders: ["Content-Type"]
     }));
 }
 
 //endpoint de bienvenida
 app.get("/", (req, res) => {
     res.json({
-        mensaje: "Bienvenido a la API, version 2",
+        mensaje: "Bienvenido a la API, version 3",
         entorno: NODE_ENV
     });
 });
@@ -79,7 +79,7 @@ app.use((req,res) => {
 app.use((err, req, res, next) =>{
     console.error("Error", err.message);
 
-    res.status(error.status || 500).json({
+    res.status(err.status || 500).json({
         error: "Error procesando la solicitud"
     });
 });
